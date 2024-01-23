@@ -1,13 +1,7 @@
-// const mongoose = require("mongoose");
-// require("dotenv").config();
-
-// mongoose.connect(process.env.DB_URL, {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-// });
-
-// module.exports = mongoose.connection;
-
 const { connect, connection } = require('mongoose');
+
+const connectionString = 'mongodb://127.0.0.1:27017/studentsDB';
+
+connect(connectionString);
 
 module.exports = connection;
