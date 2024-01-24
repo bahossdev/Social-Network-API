@@ -1,0 +1,68 @@
+const connection = require("../config/connection");
+const { User, Thought } = require("../models");
+const {users} = require("./data")
+const {thoughts} = require("./data")
+const { generateEmail, getRandomThoughts } = require("./data");
+
+connection.on("error", (err) => err);
+
+connection.once("open", async () => {
+  console.log("connected");
+  // Delete the collections if they exist
+  let thoughtCheck = await connection.db
+    .listCollections({ name: "thoughts" })
+    .toArray();
+  if (thoughtCheck.length) {
+    await connection.dropCollection("thoughts");
+  }
+
+  let usersCheck = await connection.db
+    .listCollections({ name: "users" })
+    .toArray();
+  if (usersCheck.length) {
+    await connection.dropCollection("users");
+  }
+
+  console.log('users: ', users);
+  console.log('thoughts: ', thoughts);
+
+ // Generate emails for users
+ const userEmails = users.map(generateEmail);
+
+ // Add users to the collection and await the results
+ const userData = await User.insertMany(
+   users.map((name, index) => ({
+     username: name,
+     email: userEmails[index],
+   }))
+ );
+
+ // Generate thoughts with random text
+ const randomThoughts = getRandomThoughts(userData.length);
+ console.log('---------------------');
+  console.log('Random Thoughts: ', randomThoughts);
+
+ // Create an array to store associations of thoughts with users
+ const thoughtsWithUsers = randomThoughts.reduce((accumulator, thought, index) => {
+  const numberOfThoughts = Math.floor(Math.random() * 3) + 1; 
+
+  for (let i = 0; i < numberOfThoughts; i++) {
+    accumulator.push({
+      thoughtText: thought.thoughtText,
+      username: userData[index].username,
+      reactions: [],
+    });
+  }
+
+  return accumulator;
+}, []);
+
+// Insert thoughts with user associations into the Thought collection
+const thoughtData = await Thought.insertMany(thoughtsWithUsers);
+
+ // Log out the seed data to indicate what should appear in the database
+ console.table(users);
+ console.table(thoughtData);
+ console.info("Seeding complete! 🌱");
+ process.exit(0);
+});
