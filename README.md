@@ -122,22 +122,7 @@ To run it on your local machine, follow the steps below:
     - **Manage Friend Lists:**
 
       ```
-<<<<<<< HEAD
       POST /api/users/:userId/friends/:friendId
-=======
-      POST /api/users/:userId/friends/
-      ```
-
-      Example JSON for adding a friend:
-
-      ```json
-      {
-      "_id_": "<id of an existing user>"
-      }
-      ```
-
-      ```
->>>>>>> 94025d8658774ee20494d125b69d4c251ce11c2c
       DELETE /api/users/:userId/friends/:friendId
       ```
 
