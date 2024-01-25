@@ -151,7 +151,7 @@ This app was developed with insights from various educational resources, includi
 
 ## License
 
-Please refer to the licsense in the repository for detailed information on the license governing this project.
+Please refer to the license in the repository for detailed information on the license governing this project.
 
 ## Walkthrough
 
@@ -166,4 +166,6 @@ Please refer to the licsense in the repository for detailed information on the l
 If you have any questions or need further assistance, feel free to reach out to us by [email](mailto:bahoss.dev@gmail.com).
 
 ## Screenshots
+![screenshot](https://github.com/bahossdev/Social-Network-API/assets/148646212/d03a982c-377e-4d17-bc4f-3eea4bc4ec83)
+![screeenshot2](https://github.com/bahossdev/Social-Network-API/assets/148646212/4949d9da-d9b3-48d1-9145-a16d4841d192)
 
