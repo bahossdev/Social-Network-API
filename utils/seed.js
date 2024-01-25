@@ -47,10 +47,6 @@ connection.once("open", async () => {
       username: randomUser,
       reactions: [],
     });
-    // // Update the user with the new thought
-    // randomUser.thoughts.push({
-    //   thoughtText: thought,
-    // });
 
     return accumulator;
   }, []);

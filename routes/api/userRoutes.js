@@ -9,8 +9,6 @@ const {
   removeFriend,
 } = require("../../controllers/userController");
 
-// BONUS: Remove a user's associated friends when deleted.
-
 // /api/users
 router
   .route("/")

@@ -4,22 +4,39 @@ module.exports = {
   // Get all users
   async getUsers(req, res) {
     try {
-      const users = await User.find()
-      .populate("thoughts")
-      .select("-__v");
-      
+
+        const users = await User.find().select("-__v");
+
+        // Update each user by adding thoughts
+        for (const user of users) {
+          const thoughtsToAdd = await Thought.find({ username: user.username });
+  
+          // Add the thoughts to the user's 'thoughts' array
+          const updatedUser = await User.findOneAndUpdate(
+            { _id: user._id },
+            { $addToSet: { thoughts: { $each: thoughtsToAdd } } },
+            { runValidators: true, new: true }
+          );
+        }
+  
+        // Fetch the updated users after all updates are complete
+        const updatedUsers = await User.find()
+          .populate({ path: 'thoughts' })
+          .select("-__v");
+
       res.json(users);
     } catch (err) {
       console.log(err);
       return res.status(500).json(err);
     }
   },
-  
+
   // Get a single user
   async getSingleUser(req, res) {
     try {
-      const user = await User.findOne({ _id: req.params.userId })
-      .select("-__v");
+      const user = await User.findOne({ _id: req.params.userId }).select(
+        "-__v"
+      );
 
       if (!user) {
         return res.status(404).json({ message: "No user with that ID" });
@@ -32,10 +49,9 @@ module.exports = {
           },
         },
         { runValidators: true, new: true }
-      )
-      .populate('thoughts');
+      ).populate("thoughts");
 
-      res.json({userInfo});
+      res.json({ userInfo });
     } catch (err) {
       console.log(err);
       return res.status(500).json(err);
@@ -57,10 +73,12 @@ module.exports = {
     try {
       const user = await User.findOneAndUpdate(
         { _id: req.params.userId },
-        { $set: req.body},
+        { $set: req.body },
         { runValidators: true, new: true }
       );
-      const updatedUser = await User.findOne({ _id: req.params.userId }).select("-__v");      
+      const updatedUser = await User.findOne({ _id: req.params.userId }).select(
+        "-__v"
+      );
       res.json([{ message: "User Updated successfully! 🤓" }, updatedUser]);
     } catch (err) {
       res.status(500).json(err);
@@ -70,7 +88,6 @@ module.exports = {
   // Delete a user and remove them from the thought
   async deleteUser(req, res) {
     try {
-      // const username = await User.findOne({ _id: req.params.userId })
       const user = await User.findOneAndRemove({ _id: req.params.userId });
 
       if (!user) {
@@ -84,7 +101,9 @@ module.exports = {
         });
       }
 
-      res.json({ message: "User and associated thoughts successfully deleted" });
+      res.json({
+        message: "User and associated thoughts successfully deleted",
+      });
     } catch (err) {
       console.log(err);
       res.status(500).json(err);
