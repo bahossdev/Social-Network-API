@@ -1,11 +1,13 @@
-const { ObjectId } = require("mongoose").Types;
 const { User, Thought } = require("../models");
 
 module.exports = {
   // Get all users
   async getUsers(req, res) {
     try {
-      const users = await User.find().populate("thoughts").select("-__v");
+      const users = await User.find()
+      .populate("thoughts")
+      .select("-__v");
+      
       res.json(users);
     } catch (err) {
       console.log(err);
