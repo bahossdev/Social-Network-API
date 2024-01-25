@@ -92,7 +92,7 @@ module.exports = {
       if (!user) {
         return res.status(404).json({ message: "No such user exists" });
       }
-      
+
       //Bonus: Remove a user's associated thoughts when deleted.
       const thought = await Thought.deleteMany({ username: user.username });
 
@@ -114,7 +114,6 @@ module.exports = {
   // Add an friend to a user
   async addFriend(req, res) {
     console.log("You are adding an friend");
-    console.log(req.body);
 
     try {
       const user = await User.findOneAndUpdate(
