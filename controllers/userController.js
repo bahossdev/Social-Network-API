@@ -21,10 +21,9 @@ module.exports = {
   
         // Fetch the updated users after all updates are complete
         const updatedUsers = await User.find()
-          .populate({ path: 'thoughts' })
           .select("-__v");
 
-      res.json(users);
+      res.json(updatedUsers);
     } catch (err) {
       console.log(err);
       return res.status(500).json(err);
@@ -93,6 +92,7 @@ module.exports = {
       if (!user) {
         return res.status(404).json({ message: "No such user exists" });
       }
+      
       //Bonus: Remove a user's associated thoughts when deleted.
       const thought = await Thought.deleteMany({ username: user.username });
 
@@ -119,7 +119,7 @@ module.exports = {
     try {
       const user = await User.findOneAndUpdate(
         { _id: req.params.userId },
-        { $addToSet: { friends: req.body } },
+        { $addToSet: { friends: req.params.friendId } },
         { runValidators: true, new: true }
       );
 
