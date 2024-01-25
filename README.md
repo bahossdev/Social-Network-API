@@ -145,6 +145,7 @@ Please refer to the license in the repository for detailed information on the li
 ## Walkthrough
 
 - [Link to the walkthrough video](https://drive.google.com/file/d/1YPDGpxXXa8p7UcQ0AnXIt0kpDoC2q8dd/view?usp=share_link)
+- [Link to the second video](https://drive.google.com/file/d/1sSUt9q1ntvkWINKL_oDrIomi_hDIusx1/view?usp=share_link) displaying friends are added through the url.
 
 ## Repository
 
