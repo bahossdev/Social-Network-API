@@ -153,7 +153,7 @@ This app was developed with insights from various educational resources, includi
 
 Please refer to the licsense in the repository for detailed information on the license governing this project.
 
-## Walkthrough:
+## Walkthrough
 
 - [Link to the walkthrough video](https://drive.google.com/file/d/1YPDGpxXXa8p7UcQ0AnXIt0kpDoC2q8dd/view?usp=share_link)
 
