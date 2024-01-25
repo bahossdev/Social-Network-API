@@ -58,8 +58,6 @@ connection.once("open", async () => {
   const updatedUserData = await User.find().populate("thoughts").select("-__v");
   
   // Log out the seed data to indicate what should appear in the database
-  console.table(updatedUserData);
-  console.table(thoughtData);
   console.info("Seeding complete! 🌱");
   process.exit(0);
 });
