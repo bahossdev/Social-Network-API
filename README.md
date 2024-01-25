@@ -122,7 +122,22 @@ To run it on your local machine, follow the steps below:
     - **Manage Friend Lists:**
 
       ```
+<<<<<<< HEAD
       POST /api/users/:userId/friends/:friendId
+=======
+      POST /api/users/:userId/friends/
+      ```
+
+      Example JSON for adding a friend:
+
+      ```json
+      {
+      "_id_": "<id of an existing user>"
+      }
+      ```
+
+      ```
+>>>>>>> 94025d8658774ee20494d125b69d4c251ce11c2c
       DELETE /api/users/:userId/friends/:friendId
       ```
 
@@ -152,7 +167,7 @@ Please refer to the license in the repository for detailed information on the li
 
 ## Questions
 
-If you have any questions or need further assistance, feel free to reach out to us by [email](mailto:bahoss.dev@gmail.com).
+If you have any questions or need further assistance, feel free to reach out to me by [email](mailto:bahoss.dev@gmail.com).
 
 ## Screenshots
 ![screenshot](https://github.com/bahossdev/Social-Network-API/assets/148646212/d03a982c-377e-4d17-bc4f-3eea4bc4ec83)
