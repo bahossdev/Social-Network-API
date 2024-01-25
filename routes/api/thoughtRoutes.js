@@ -1,8 +1,3 @@
-// get: timestamp => {
-//     return new Date(timestamp).toLocaleString();
-//   },
-// const dayjs = require("dayjs");
-
 const router = require("express").Router();
 const {
   getThoughts,
@@ -10,8 +5,8 @@ const {
   createThought,
   updateThought,
   deleteThought,
-  // addReaction,
-  // removeReaction,
+  addReaction,
+  removeReaction,
 } = require("../../controllers/thoughtController.js");
 
 // /api/thoughts
@@ -29,12 +24,10 @@ router
 
 // /api/thoughts/:thoughtId/reactions
 router
-  .route("/:thoughtId/reactions")
-  // .post(addReaction);
+  .route("/:thoughtId/reactions").post(addReaction);
 
 // /api/thoughts/:thoughtId/reactions/:reactionId
 router
-  .route("/:thoughtId/reactions/:reactionId")
-  // .delete(removeReaction);
+  .route("/:thoughtId/reactions/:reactionId").delete(removeReaction);
 
 module.exports = router;

@@ -38,21 +38,19 @@ connection.once("open", async () => {
  );
 
  // Generate thoughts with random text
- const randomThoughts = getRandomThoughts(userData.length);
- console.log('---------------------');
-  console.log('Random Thoughts: ', randomThoughts);
+//  const randomThoughts = getRandomThoughts(userData.length);
 
  // Create an array to store associations of thoughts with users
- const thoughtsWithUsers = randomThoughts.reduce((accumulator, thought, index) => {
-  const numberOfThoughts = Math.floor(Math.random() * 3) + 1; 
+const thoughtsWithUsers = thoughts.reduce((accumulator, thought, index) => {
+// const numberOfThoughts = Math.floor(Math.random() * 3) + 1; 
 
-  for (let i = 0; i < numberOfThoughts; i++) {
+  // for (let i = 0; i < numberOfThoughts; i++) {
     accumulator.push({
-      thoughtText: thought.thoughtText,
-      username: userData[index].username,
+      thoughtText: thought,
+      username: userData[Math.floor(Math.random() * userData.length)].username,
       reactions: [],
     });
-  }
+  // }
 
   return accumulator;
 }, []);
