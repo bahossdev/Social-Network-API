@@ -33,24 +33,13 @@ module.exports = {
   // Get a single user
   async getSingleUser(req, res) {
     try {
-      const user = await User.findOne({ _id: req.params.userId }).select(
-        "-__v"
-      );
 
-      if (!user) {
-        return res.status(404).json({ message: "No user with that ID" });
-      }
-      const userInfo = await User.findOneAndUpdate(
-        { _id: req.params.userId },
-        {
-          $addToSet: {
-            thoughts: await Thought.find({ username: user.username }),
-          },
-        },
-        { runValidators: true, new: true }
-      ).populate("thoughts");
+      const user = await User.findOne({ _id: req.params.userId })
+      .select("-__v")
+      .populate("thoughts", "-__v")
+      .populate("friends", "-__v");
 
-      res.json({ userInfo });
+      res.json({ user });
     } catch (err) {
       console.log(err);
       return res.status(500).json(err);
